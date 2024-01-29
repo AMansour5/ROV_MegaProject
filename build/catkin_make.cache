@@ -1,0 +1,2 @@
+first_project_pkg
+-DCATKIN_DEVEL_PREFIX=/home/mypi/kady_hossam_naggar/devel -DCMAKE_INSTALL_PREFIX=/home/mypi/kady_hossam_naggar/install -G Unix Makefiles

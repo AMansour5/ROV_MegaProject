@@ -1,0 +1,8 @@
+prefix=/home/mypi/kady_hossam_naggar/devel
+
+Name: first_project_pkg
+Description: Description of first_project_pkg
+Version: 0.0.0
+Cflags: -I/home/mypi/kady_hossam_naggar/devel/include
+Libs: -L${prefix}/lib -lfirst_project_pkg
+Requires: rospy std_msgs rosbridge_server

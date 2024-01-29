@@ -1,0 +1,47 @@
+#!/usr/bin/env python3
+import time
+import board
+import busio
+from adafruit_pca9685 import PCA9685
+import rospy
+from std_msgs.msg import Int32
+from first_project_pkg.msg import joy
+
+class PCA():
+   def __init__(self):
+       self.i2c = busio.I2C(board.SCL, board.SDA)
+       self.pca = PCA9685(self.i2c)
+       self.pca.frequency = 50
+       self.sub = rospy.Subscriber('webtoros',joy, self.callback)
+       self.value = 0
+
+   def microToDuty(self,value):
+       return int(((value/20000)*0xFFFF)+130)
+
+   def servo (self,channel_number,value):
+       self.pca.channels[channel_number].duty_cycle = self.microToDuty(value)
+   def map_values(self, x):
+     # Define the input and output ranges
+        input_range = [-1, 1]
+        output_range = [1100, 1900]
+
+        # Calculate the ratio of the output range to the input range
+        ratio = (output_range[1] - output_range[0]) / (input_range[1] - input_range[0])
+
+        # Calculate the new value
+        new_value = x * ratio + output_range[0] - input_range[0] * ratio
+        return new_value
+   def callback(self, data):
+       if data.button_index == 6:
+           self.value += 0.1
+       elif data.button_index == 8:
+           self.value -= 0.1
+       self.servo(9,self.value)
+
+if __name__ == '__main__':
+   rospy.init_node('servo_joy', anonymous=False)
+   pca = PCA()
+   try:
+       rospy.spin()
+   except KeyboardInterrupt:
+       pass

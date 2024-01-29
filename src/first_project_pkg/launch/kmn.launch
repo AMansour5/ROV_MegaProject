@@ -1,0 +1,10 @@
+<launch>
+    <node name = "servo_joy" pkg="first_project_pkg" type="servoSub.py" output="screen">
+    </node>
+    <node name = "gripper_node" pkg="first_project_pkg" type="gripperV2.py" output="screen">
+    </node>
+    <node name = "servo_controller" pkg="first_project_pkg" type="forwardBackward.py" output="screen">
+    </node>
+    <node name = "height_controller" pkg="first_project_pkg" type="height.py" output="screen">
+    </node>
+</launch>
