@@ -1,6 +1,6 @@
 # ROV System 
 
-This repo aims to develop a control system for Robotech's ROV which includes the following components:
+This repo aims to develop a control system for Robotech's ROV using ROS which includes the following components:
 
 1) ServoDriver
 2) Grippers 
